@@ -1,0 +1,8 @@
+name: "Detect specific keywords"
+description: |
+  Detect keywords or phrases in the body content of messages.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any([body.plain.raw, body.html.inner_text], strings.ilike(., "*voicemail*", "*password reset*"))

@@ -1,0 +1,23 @@
+name: "Unkown sender or repeated sender"
+description: |
+  Detects links in the body of an email from name: "Unkown sender or repeated sender"
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and (
+    (
+      profile.by_sender().prevalence in ("new", "outlier")
+      and not profile.by_sender().solicited
+    )
+    or (
+      profile.by_sender().any_messages_malicious_or_spam
+      and not profile.by_sender().any_false_positives
+    )
+  )
+tags:
+  - "Attack surface reduction"
+attack_types:
+  - "Credential Phishing"
+detection_methods:
+  - "Sender analysis"

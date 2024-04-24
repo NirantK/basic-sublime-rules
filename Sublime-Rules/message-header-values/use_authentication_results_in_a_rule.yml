@@ -1,0 +1,7 @@
+name: "Use Authentication-Results in a rule"
+description: |
+  How to use authentication results in a rule.
+type: "rule"
+source: |
+  type.inbound
+  and any(headers.hops, .authentication_results.dmarc =~ "fail")

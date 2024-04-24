@@ -1,0 +1,15 @@
+name: "Email address is a To, CC, or BCC"
+description: |
+  Detects an email where address is a To, CC, or BCC.
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and any([recipients.to, recipients.cc, recipients.bcc], 
+    any(., .email.email == "foo@bar.com")
+  )
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "HTML analysis"
+  - "URL analysis"

@@ -1,0 +1,14 @@
+name: "Brand impersonation via free file hosting links"
+description: "Detects low reputation links via hosting links"
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(body.links, .href_url.domain.domain in $free_file_hosts)
+attack_types:
+  - "Credential Phishing"
+tactics_and_techniques:
+  - "Free file host"
+detection_methods:
+  - "Sender analysis"
+  - "URL analysis"

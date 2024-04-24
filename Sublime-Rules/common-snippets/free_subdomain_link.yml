@@ -1,0 +1,10 @@
+description: nan
+name: Free subdomain link
+source: |
+  type.inbound
+  and any(body.links,
+    .href_url.domain.subdomain is not null
+    and .href_url.domain.subdomain != "www"
+    and .href_url.domain.root_domain in $free_subdomain_hosts
+  )
+type: rule

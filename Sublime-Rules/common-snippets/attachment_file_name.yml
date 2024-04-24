@@ -1,0 +1,18 @@
+name: "Attachment file name"
+description: |
+  Detects if email contains any attachments related to txt.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(attachments, .file_name == "foo.txt")
+tags:
+  - "Attack surface reduction"
+  - "Social engineering"
+attack_types:
+  - "Spam"
+detection_methods:
+  - "Sender analysis"
+  - "Content analysis"
+  - "Header analysis"
+  - "Sender analysis"

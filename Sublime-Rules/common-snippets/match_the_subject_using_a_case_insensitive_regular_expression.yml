@@ -1,0 +1,14 @@
+name: "Match the subject using a case-insensitive regular expression"
+description: |
+  Detects an email with a match the subject using a case-insensitive regular expression.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and regex.icontains(subject.subject, "foo.*bar")
+tags:
+ - "Attack surface reduction"
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"
+  - "HTML analysis"

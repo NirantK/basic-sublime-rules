@@ -1,0 +1,8 @@
+name: "Detect complex phrases"
+description: |
+  Detect complex phrases in the body content of messages.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any([body.plain.raw, body.html.inner_text], regex.contains(., '\b(\d\d\d)-(\d\d)-(\d\d\d\d)\b'))

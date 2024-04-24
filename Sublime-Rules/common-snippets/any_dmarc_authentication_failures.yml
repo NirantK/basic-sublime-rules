@@ -1,0 +1,13 @@
+name: "Any DMARC authentication failures"
+description: |
+  Detects an email with any DMARC authentication failures.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(headers.hops, .authentication_results.dmarc == "fail")
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"
+  - "HTML analysis"
+  - "URL analysis"

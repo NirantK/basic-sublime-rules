@@ -1,0 +1,11 @@
+name: "Only run on specific mailboxes in a custom list"
+description: |
+  Only run on specific mailboxes in a custom list
+type: "rule"
+severity: "medium"
+source: |
+  type.outbound
+  and mailbox.email.email in $highly_targeted_user_email_addresses
+tags:
+  - "DLP"
+  - "Suspicious recipient"

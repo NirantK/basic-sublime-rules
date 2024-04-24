@@ -1,0 +1,16 @@
+name: "Recipient is in a user group list"
+description: |
+  Recipient is in a user group list
+type: rule
+severity: medium
+source: |
+  type.inbound
+  and (
+      any(recipients.to, any($finance_users, .email == ..email.email))
+    )
+tags: 
+  - ASR
+attack_types:
+  - "Credential Phishing"
+detection_methods:
+  - "Sender analysis"

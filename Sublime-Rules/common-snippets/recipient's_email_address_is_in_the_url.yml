@@ -1,0 +1,19 @@
+name: "Recipient's email address is in the URL path of a link in the body"
+description: |
+  Recipient's email address is in the URL path of a link in the body
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and  any(body.links,
+        any(recipients.to,
+          strings.icontains(..href_url.url, .email.local_part)
+          and strings.icontains(..href_url.url, .email.domain.domain)
+        )
+    )
+tactics_and_techniques:
+  - "Exploit"
+  - "HTML smuggling"
+tags:
+  - "DLP"
+  - "Suspicious recipient"

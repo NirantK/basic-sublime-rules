@@ -1,0 +1,19 @@
+name: "Lookalike sender domain hard-coded string"
+description: |
+  Detects an email which Lookalike sender domain hard-coded string.
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and sender.email.domain.domain not in $org_domains
+  and strings.levenshtein(sender.email.domain.domain, "foo.com") < 3
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"
+  - "HTML analysis"
+  - "URL analysis"
+tactics_and_techniques:
+  - "Lookalike domain"
+

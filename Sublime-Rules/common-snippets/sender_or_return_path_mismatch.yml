@@ -1,0 +1,14 @@
+name: "Sender or Return-path mismatch"
+description: |
+  Detects an email with Sender or Return-path mismatch.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and sender.email.email != headers.return_path.email
+tags:
+ - "Attack surface reduction"
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"
+  - "HTML analysis"

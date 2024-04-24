@@ -1,0 +1,14 @@
+name: "Specific mailer"
+description: |
+  Detects an email from a specific mailer.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and strings.istarts_with(headers.mailer, "Foo")
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "Content analysis"
+  - "Header analysis"
+  - "Sender analysis"

@@ -1,0 +1,15 @@
+name: "Exclude email addresses or aliases in a custom list-Outbound"
+description: |
+  Detects emails to support aliases
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and not mailbox.email.email in ("jane.doe@foobar.com")
+tags:
+  - "Attack surface reduction"
+tactics_and_techniques:
+  - "Free subdomain host"
+detection_methods:
+  - "Header analysis"
+  - "URL analysis"

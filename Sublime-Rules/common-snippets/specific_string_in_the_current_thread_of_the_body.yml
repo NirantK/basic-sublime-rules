@@ -1,0 +1,14 @@
+name: "Specific string in the current thread of the body"
+description: |
+  Detects an email with specific strings in the current thread of the body.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and strings.contains(body.current_thread.text, "foo bar")
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "Content analysis"
+  - "Header analysis"
+  - "Sender analysis"

@@ -1,0 +1,13 @@
+name: Detect the term "enable macros" in multiple attachment file types
+description: |
+  Rule to detect the presence of the term "enable macros" within the content of mail attachment belonging to multiple file types 
+  like "doc", "docm", "docx", "dot", "dotm", "pptm", "ppsm", "xlm", "xls", "xlsb", "xlsm", "xlt", "xltm", "zip"
+type: "rule"
+source: |
+  type.inbound
+  and any(attachments,
+    .file_extension in~ ("doc", "docm", "docx", "dot", "dotm", "pptm", "ppsm", "xlm", "xls", "xlsb", "xlsm", "xlt", "xltm", "zip")
+      and any(file.explode(.), 
+        strings.icontains(.scan.ocr.raw, "enable macros")
+      )
+  )

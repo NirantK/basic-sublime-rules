@@ -1,0 +1,13 @@
+name: "Exclude email addresses or aliases in a custom list"
+description: |
+  exclude emails to support aliases
+type: "rule"
+severity: "medium"
+source: |
+  type.outbound
+  and not any([recipients.to, recipients.cc, recipients.bcc], 
+    any(., .email.email in $support_email_aliases)
+  )
+tags:
+  - "DLP"
+  - "Suspicious recipient"

@@ -1,0 +1,14 @@
+name: "Outbound message to a specific email address"
+description: |
+  Detects any email outbound message to a specific email address.
+type: "rule"
+severity: "medium"
+source: |
+  type.outbound
+  and any(recipients.to, .email.email == "foo@bar.com")
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "Content analysis"
+  - "Header analysis"
+  - "Sender analysis"

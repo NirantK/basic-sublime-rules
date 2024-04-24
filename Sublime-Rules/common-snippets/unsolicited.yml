@@ -1,0 +1,15 @@
+name: "Unsolicited"
+description: "HTML e-mail message with a crafted document."
+type: "rule"
+severity: "critical"
+source: |
+  type.inbound
+  and not profile.by_sender().solicited
+attack_types:
+  - "Malware/Ransomware"
+tactics_and_techniques:
+  - "Exploit"
+  - "HTML smuggling"
+  - "Scripting"
+detection_methods:
+  - "Content analysis"

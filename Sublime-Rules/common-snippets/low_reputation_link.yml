@@ -1,0 +1,21 @@
+name: "Low reputation link"
+description: |
+  Low reputation link
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and
+    any(body.links,
+    .href_url.domain.root_domain not in $tranco_1m
+    or (
+        // free subdomain URL
+        .href_url.domain.subdomain is not null
+        and .href_url.domain.subdomain != "www"
+        and .href_url.domain.root_domain in $free_subdomain_hosts
+    )
+  )
+tags:   
+  - "Attack surface reduction"
+attack_types:
+  - "Credential Phishing"

@@ -1,0 +1,22 @@
+name: "High trust sender domain"
+description: |
+  negate highly trusted sender domains unless they fail DMARC authentication
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and (
+    (
+      sender.email.domain.root_domain in $high_trust_sender_root_domains
+      and (
+        any(distinct(headers.hops, .authentication_results.dmarc is not null),
+            strings.ilike(.authentication_results.dmarc, "*fail")
+        )
+      )
+    )
+    or sender.email.domain.root_domain not in $high_trust_sender_root_domains
+  )
+tags:
+  - "Attack surface reduction"
+attack_types:
+  - "Credential Phishing"

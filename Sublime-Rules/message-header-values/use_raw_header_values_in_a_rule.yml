@@ -1,0 +1,11 @@
+name: "Use raw header values in a rule"
+description: |
+  How to use raw header values in a rule.
+type: "rule"
+source: |
+  type.inbound
+  and any(headers.hops,
+          any(.fields,
+              strings.ilike(.name, "Received-SPF") and strings.ilike(.value, "*spf=temperror*")
+          )
+  )

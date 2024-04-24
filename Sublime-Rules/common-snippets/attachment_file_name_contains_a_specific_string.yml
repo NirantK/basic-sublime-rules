@@ -1,0 +1,21 @@
+name: "Attachment file name contains a specific string"
+description: |
+  Detects if email contains any attachments with specific string.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(attachments,
+    .file_type == "pdf"
+    and strings.icontains(.file_name, "foobar")
+  )
+tags:
+  - "Attack surface reduction"
+  - "Social engineering"
+attack_types:
+  - "Spam"
+detection_methods:
+  - "Sender analysis"
+  - "Content analysis"
+  - "Header analysis"
+  - "Sender analysis"

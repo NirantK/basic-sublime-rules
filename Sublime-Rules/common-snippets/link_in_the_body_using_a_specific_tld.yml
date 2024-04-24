@@ -1,0 +1,11 @@
+name: "Link in the body using a specific TLD"
+description: |
+  Detects an email with Link in the body using a specific TLD.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(body.links, .href_url.domain.tld == "ru")
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"

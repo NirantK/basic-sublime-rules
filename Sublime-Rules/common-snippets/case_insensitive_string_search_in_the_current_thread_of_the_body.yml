@@ -1,0 +1,14 @@
+name: "Case insensitive string search in the current thread of the body"
+description: |
+  Detects an email with case insensitive string search in the current thread of the body.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and strings.icontains(body.current_thread.text, "foo bar")
+tags:
+  - "Social engineering"
+detection_methods:
+  - "Content analysis"
+  - "Header analysis"
+  - "Sender analysis"

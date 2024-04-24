@@ -1,0 +1,11 @@
+name: "Inbound message to a specific recipient email address"
+description: |
+  Detects an email with inbound message to a specific recipient email address.
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(recipients.to, .email.email == "foo@bar.com")
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"

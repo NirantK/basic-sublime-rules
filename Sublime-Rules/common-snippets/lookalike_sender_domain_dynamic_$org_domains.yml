@@ -1,0 +1,17 @@
+name: "Lookalike sender domain dynamic org_domains"
+description: |
+  Detects an email which lookalike sender domain dynamic org_domains.
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and sender.email.domain.domain not in $org_domains
+  and any($org_domains, strings.levenshtein(sender.email.domain.domain, .) < 3)
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "HTML analysis"
+  - "URL analysis"
+tactics_and_techniques:
+  - "Lookalike domain"
+

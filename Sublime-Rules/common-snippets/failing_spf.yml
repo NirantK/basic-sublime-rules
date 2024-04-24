@@ -1,0 +1,15 @@
+name: "Failing SPF"
+description: |
+  Detects an email which failed SPF.
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and any(headers.hops, .authentication_results.spf == "fail")
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"
+  - "HTML analysis"
+  - "URL analysis"

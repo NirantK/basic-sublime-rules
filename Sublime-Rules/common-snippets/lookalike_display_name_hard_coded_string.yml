@@ -1,0 +1,15 @@
+name: "Lookalike display name hard-coded string"
+description: |
+  Detects an email which lookalike display name with a hard-coded string.
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and strings.ilevenshtein(sender.display_name, "Jane Doe") < 3
+tags:
+  - "Attack surface reduction"
+detection_methods:
+  - "Header analysis"
+  - "Sender analysis"
+  - "HTML analysis"
+  - "URL analysis"

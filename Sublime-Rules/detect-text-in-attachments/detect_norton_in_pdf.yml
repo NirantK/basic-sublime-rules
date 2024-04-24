@@ -1,0 +1,11 @@
+name: Detect the term norton in pdf
+description: |
+  Detects the existance of term norton in the pdf attachment
+type: "rule"
+source: |
+  type.inbound
+  and any(attachments, .file_extension == "pdf" and
+    any(file.explode(.), 
+      any(.scan.strings.strings, strings.icontains(., "norton"))
+    )
+  )
